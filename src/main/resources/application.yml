@@ -3,7 +3,7 @@ spring:
     config:
       server:
         git:
-          uri: file://d:/temp/tewarehouse/terawarehouse-git
+          uri: file://d:/temp/terawarehouse/git
 server:
   error:
     whitelabel:
