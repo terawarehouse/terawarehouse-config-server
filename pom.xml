@@ -23,6 +23,11 @@
 
 	<repositories>
 		<repository>
+			<id>jcenter-snapshots</id>
+			<name>jcenter</name>
+			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+		</repository>
+		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
 			<url>https://repo.spring.io/milestone</url>
@@ -49,7 +54,7 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.broodcamp</groupId>
+				<groupId>com.terawarehouse</groupId>
 				<artifactId>terawarehouse-bom</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 				<type>pom</type>
