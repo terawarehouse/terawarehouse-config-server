@@ -17,4 +17,4 @@ COPY ${JAR_FILE} app.jar
 # java -jar /opt/app/app.jar
 # Use sh to support JAVA_OPTS
 # Use ${@} to pass all command arguments
-ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app.jar ${0} ${@}"]
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar app.jar ${0} ${@}"]
