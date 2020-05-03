@@ -5,8 +5,8 @@ MAINTAINER czetsuya@gmail.com
 # Refer to Maven build -> finalName
 ARG JAR_FILE=target/terawarehouse-config-server.jar
 
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring
+RUN addgroup -S tomcat && adduser -S tomcat -G tomcat
+USER tomcat
 
 # cd /opt/app
 WORKDIR /opt/app
