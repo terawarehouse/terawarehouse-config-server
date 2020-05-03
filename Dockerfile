@@ -1,6 +1,20 @@
+FROM adoptopenjdk/openjdk11:jdk-11.0.7_10-alpine as build
+
+LABEL author czetsuya@gmail.com
+
+WORKDIR /workspace/app
+
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+COPY src src
+
+RUN ./mvnw install -DskipTests
+RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-MAINTAINER czetsuya@gmail.com
+LABEL author czetsuya@gmail.com
 
 # Refer to Maven build -> finalName
 ARG JAR_FILE=target/terawarehouse-config-server.jar
@@ -8,15 +22,9 @@ ARG JAR_FILE=target/terawarehouse-config-server.jar
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring
 
-# cd /opt/app
-WORKDIR /opt/app
+ARG DEPENDENCY=/workspace/app/target/dependency
+COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
+COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-VOLUME /tmp
-
-# cp target/spring-boot-web.jar /opt/app/app.jar
-COPY ${JAR_FILE} app.jar
-
-# java -jar /opt/app/app.jar
-# Use sh to support JAVA_OPTS
-# Use ${@} to pass all command arguments
-ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar /app.jar ${0} ${@}"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.terawarehouse.TerawarehouseConfigServerApplication"]
