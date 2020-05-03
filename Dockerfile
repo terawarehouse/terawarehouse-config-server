@@ -1,6 +1,6 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
 
-MAINTAINER czetsuya@gmail.com
+LABEL author czetsuya@gmail.com
 
 # Refer to Maven build -> finalName
 ARG JAR_FILE=target/terawarehouse-config-server.jar
