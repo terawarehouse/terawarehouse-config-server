@@ -15,13 +15,13 @@ The properties are loaded from a Git repository https://github.com/terawarehouse
 ## Dockerized
 
 ```
-docker build -t com.terawarehouse/config-server .
-docker run -d -p 8000:8000 com.terawarehouse/config-server
+docker build -t czetsuya/terawarehouse-config-server .
+docker run -d -p 8000:8000 czetsuya/terawarehouse-config-server
 ```
 
-Configuration should be available at http://192.168.1.101:8000/<propertyFile>/default
+Configuration should be available at http://localhost:8000/<propertyFile>/default
 
-For example: http://192.168.1.101:8000/catalog/default
+For example: http://localhost:8000/catalog/default
  
 ## Repositories
 
